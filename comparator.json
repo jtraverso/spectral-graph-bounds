@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "AdjacencySpectrum.average_degree_le",
+    "AdjacencySpectrum.le_maxDegree",
+    "AdjacencySpectrum.wilf",
+    "AdjacencySpectrum.hoffman_chromatic",
+    "AdjacencySpectrum.hoffman_ratio"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -1,0 +1,160 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Spectral bounds on the chromatic and independence numbers"
+  description: >-
+    A Lean 4 / Mathlib formalization of classical eigenvalue bounds for a finite simple graph G on
+    a nonempty vertex type, with λ_max and λ_min the largest and smallest eigenvalues of its real
+    adjacency matrix: the average degree is at most λ_max and λ_max is at most the maximum degree
+    (Collatz–Sinogowitz); G is (⌊λ_max⌋ + 1)-colourable (Wilf 1967); if G has an edge, every
+    proper colouring uses at least 1 − λ_max/λ_min colours (Hoffman 1970); and if G is k-regular
+    with k ≥ 1, every independent set has at most n(−λ_min)/(k − λ_min) vertices (Hoffman's ratio
+    bound). Mathlib has the spectral theorem for Hermitian matrices but none of these bounds.
+  authors:
+    - "Juan Pablo Traverso Gianini"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Juan Pablo Traverso Gianini"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05C50", "05C15", "05C69"]
+
+sources:
+  - title: "Spektren endlicher Grafen"
+    authors:
+      - "L. Collatz"
+      - "U. Sinogowitz"
+    id: "doi:10.1007/BF02941924"
+    type: "paper"
+    location: "Abhandlungen aus dem Mathematischen Seminar der Universität Hamburg 21 (1957), 63–77"
+    relationship: "formalizes"
+    note: "Average degree ≤ λ_max ≤ maximum degree."
+    license: "all rights reserved"
+    author_endorsement: "n/a"
+  - title: "The Eigenvalues of a Graph and Its Chromatic Number"
+    authors:
+      - "H. S. Wilf"
+    id: "doi:10.1112/jlms/s1-42.1.330"
+    type: "paper"
+    location: "Journal of the London Mathematical Society 42 (1967), 330–332"
+    relationship: "formalizes"
+    note: "χ(G) ≤ 1 + λ_max."
+    license: "all rights reserved"
+    author_endorsement: "n/a"
+  - title: "On eigenvalues and colorings of graphs"
+    authors:
+      - "A. J. Hoffman"
+    type: "paper"
+    location: "In: B. Harris (ed.), Graph Theory and its Applications, Academic Press, New York (1970), 79–91"
+    relationship: "formalizes"
+    note: "χ(G) ≥ 1 − λ_max/λ_min for graphs with at least one edge (no DOI)."
+    license: "all rights reserved"
+    author_endorsement: "n/a"
+  - title: "On the Shannon capacity of a graph"
+    authors:
+      - "L. Lovász"
+    id: "doi:10.1109/TIT.1979.1055985"
+    type: "paper"
+    location: "IEEE Transactions on Information Theory 25 (1979), 1–7"
+    relationship: "background"
+    note: >-
+      Hoffman's ratio bound α(G) ≤ n(−λ_min)/(λ_max − λ_min) for regular graphs, obtained there
+      through the bound on the theta function; the formalization proves it directly by the
+      Rayleigh quotient.
+    license: "all rights reserved"
+    author_endorsement: "n/a"
+
+status:
+  scope: >-
+    Proved for every finite simple graph on a nonempty vertex type (any universe), with the
+    hypotheses stated in each theorem (an edge for Hoffman's chromatic bound; k-regularity with
+    k ≥ 1 for the ratio bound).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "autonomous"
+      models: ["Aristotle (Harmonic)"]
+      framework: "Aristotle CLI"
+      tool_setup: >-
+        Produced all proofs in one run from the formal statements and a proof plan (Rayleigh
+        quotient bounds from the spectral theorem, greedy colouring, test vectors on colour
+        classes and independent sets); the return was audited (statements and headers unchanged,
+        no added axioms) and rebuilt locally.
+      cost:
+        wall_time: "under one hour"
+        spend_usd: "not tracked"
+        hardware: "API-only"
+      prompting_notes: "Formal statements and proof plan supplied."
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code (Anthropic)"
+      tool_setup: >-
+        Statement design, proof plan, integration and review of the Aristotle return, and the
+        Palomar packaging, checked with `lake build` and `#print axioms` (Lean v4.35.0-rc3,
+        Mathlib c55e6e786f49471c72fbddbec5415808896aec1e).
+      cost:
+        wall_time: "about one hour"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "Natural-language instructions in Spanish, directed by the author."
+  spend_usd: "subscription-based"
+  notes: >-
+    The results were chosen by the human author; the Lean proofs are AI-generated and
+    mechanically verified (no `sorry`, axioms limited to propext, Classical.choice and Quot.sound,
+    identical elaborated types for the Challenge/Solution pair).
+
+fidelity:
+  divergences: >-
+    The eigenvalues are Mathlib's `Matrix.IsHermitian.eigenvalues` of the real adjacency matrix,
+    indexed by the vertex type; the statements take the (always satisfiable) hypothesis that the
+    adjacency matrix is Hermitian, and λ_max, λ_min are written `⨆ i, hA.eigenvalues i` and
+    `⨅ i, hA.eigenvalues i`. Wilf's bound is stated as colourability with ⌊λ_max⌋ + 1 colours.
+    Hoffman's chromatic bound is stated for every c such that G is c-colourable, and requires an
+    edge (otherwise λ_min = 0). The ratio bound is stated for k-regular graphs with k ≥ 1, where
+    λ_max = k.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Claude Opus 5.5 (AI agent in Claude Code, acting for the author)"
+  notes: >-
+    Agent review by Claude Opus 5.5, distinct from the mechanical verification: the agent
+    compared the statements with the cited bounds, checked the degenerate cases (no edges,
+    k = 0), checked that the Aristotle return left every statement and header unchanged, and
+    confirmed by `lake build`, `#print axioms` and a comparison of the fully elaborated
+    Challenge and Solution types that the proofs use no `sorry` and only propext,
+    Classical.choice and Quot.sound. The author directed the work and approved the statements.
+    No independent human mathematical review has been performed. The results are classical; no
+    mathematical novelty is claimed.
+
+alignment:
+  namespace: "AdjacencySpectrum"
+  statements:
+    - source: "Collatz–Sinogowitz (1957): average degree ≤ λ_max"
+      lean: "AdjacencySpectrum.average_degree_le"
+      module: "Challenge"
+      status: "proved"
+    - source: "Collatz–Sinogowitz (1957): λ_max ≤ maximum degree"
+      lean: "AdjacencySpectrum.le_maxDegree"
+      module: "Challenge"
+      status: "proved"
+    - source: "Wilf (1967): χ(G) ≤ ⌊λ_max⌋ + 1"
+      lean: "AdjacencySpectrum.wilf"
+      module: "Challenge"
+      status: "proved"
+    - source: "Hoffman (1970): χ(G) ≥ 1 − λ_max/λ_min"
+      lean: "AdjacencySpectrum.hoffman_chromatic"
+      module: "Challenge"
+      status: "proved"
+    - source: "Hoffman's ratio bound for regular graphs"
+      lean: "AdjacencySpectrum.hoffman_ratio"
+      module: "Challenge"
+      status: "proved"
+
+acknowledgements: >-
+  Mathlib and the Lean community; Harmonic's Aristotle.
