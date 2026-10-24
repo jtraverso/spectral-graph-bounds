@@ -152,3 +152,44 @@ def Colorable (n : ℕ) : Prop := Nonempty (G.Coloring (Fin n))
 abbrev IsIndepSet (s : Set α) : Prop :=
   s.Pairwise (fun v w ↦ ¬G.Adj v w)
 ```
+
+## New Cheeger contracts: all six custom definitions are independent
+
+`Challenge.lean` repeats the complete definitions of `GraphCheeger.arcs`,
+`boundary`, `energy`, `mass`, `cheegerConstant`, and `spectralGap`. Comparator
+checks both their types and their bodies against Solution. In particular:
+
+- arcs contain both orientations of each graph edge;
+- boundary counts arcs whose first endpoint lies in A and second endpoint lies
+  outside A, hence one contribution per crossing undirected edge;
+- energy is the squared-difference arc sum divided by two;
+- mass is the ordinary sum of squared coordinates;
+- h is the real infimum of boundary/cardinality over nonempty sets of size at
+  most half the ground set;
+- lambda is the real infimum of energy/mass over mean-zero functions of positive
+  squared mass.
+
+The nonemptiness and lower boundedness of both infimum sets are proved under
+`2 ≤ Fintype.card V`. Finset cardinalities are natural numbers and are cast into
+Mathlib's real numbers for divisions. No abstract or axiomatized graph energy,
+boundary, expansion constant, or spectral-gap interface replaces these definitions.
+
+## SimpleGraph.lapMatrix
+
+[Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean:80](https://github.com/leanprover-community/mathlib4/blob/c55e6e786f49471c72fbddbec5415808896aec1e/Mathlib/Combinatorics/SimpleGraph/LapMatrix.lean#L80):
+
+```lean
+def lapMatrix [AddGroupWithOne R] : Matrix V V R := G.degMatrix R - G.adjMatrix R
+```
+
+`degMatrix` is diagonal with the degree of each vertex. `adjMatrix` has entry one
+on adjacent pairs and zero elsewhere. The selected `energy_eq_laplacian` theorem
+identifies the explicit graph energy above with this exact Mathlib quadratic form.
+An eigenfunction in the selected comparison theorem satisfies the actual matrix
+identity `G.lapMatrix ℝ *ᵥ f = l • f`, with l and f both nonzero. Matrix-vector
+multiplication is the ordinary finite sum and scalar multiplication is pointwise.
+
+`SimpleGraph.maxDegree` in `Mathlib/Combinatorics/SimpleGraph/Finite.lean` is the
+finite maximum of the vertex degrees, defaulting to zero on an empty vertex type.
+The new statements impose n ≥ 2 where a variational spectral gap is needed; no
+ambiguity about the empty graph's maximum is used in the proof.

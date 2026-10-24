@@ -5,7 +5,17 @@ Authors: Juan Pablo Traverso Gianini
 -/
 module
 
-public import Mathlib
+public import Mathlib.Analysis.Matrix.Spectrum
+public import Mathlib.Combinatorics.SimpleGraph.AdjMatrix
+public import Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+public import Mathlib.Order.ConditionallyCompleteLattice.Finset
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Spectral bounds on the chromatic number and the independence number
@@ -217,6 +227,8 @@ theorem le_maxDegree : ⨆ i, hA.eigenvalues i ≤ G.maxDegree := by
           exact_mod_cast G.degree_le_maxDegree u
   exact (le_abs_self lam).trans (le_of_mul_le_mul_right hbound hpos)
 
+-- Retain the registered nonempty-vertex parameter, although this proof does not need it.
+set_option linter.unusedSectionVars false in
 /-- **Wilf's theorem (1967).** A finite graph is `(⌊λ_max⌋ + 1)`-colourable, where `λ_max` is
 the largest eigenvalue of its adjacency matrix. -/
 theorem wilf : G.Colorable (⌊⨆ i, hA.eigenvalues i⌋₊ + 1) := by
