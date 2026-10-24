@@ -5,8 +5,8 @@ Authors: Juan Pablo Traverso Gianini
 -/
 module
 
-public import Mathlib
 public import SpectralLib.SpectralBounds
+public import SpectralLib.CheegerLaplacian
 
 /-!
 # Proofs of the statements in `Challenge.lean`

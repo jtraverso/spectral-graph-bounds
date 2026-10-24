@@ -1,11 +1,10 @@
 name = "spectral_bounds"
-version = "0.1.0"
-defaultTargets = ["SpectralLib", "Challenge", "Solution"]
+version = "0.2.0"
+defaultTargets = ["Solution"]
 requiresModuleSystem = true
 
 [leanOptions]
 relaxedAutoImplicit = false
-weak.linter.mathlibStandardSet = true
 
 [[require]]
 name = "mathlib"
@@ -23,3 +22,6 @@ roots = ["Challenge"]
 [[lean_lib]]
 name = "Solution"
 roots = ["Solution"]
+
+[[lean_lib]]
+name = "Audit"

@@ -5,7 +5,18 @@ Authors: Juan Pablo Traverso Gianini
 -/
 module
 
-public import Mathlib
+public import Mathlib.Analysis.Matrix.Spectrum
+public import Mathlib.Combinatorics.SimpleGraph.AdjMatrix
+public import Mathlib.Combinatorics.SimpleGraph.LapMatrix
+public import Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+public import Mathlib.Order.ConditionallyCompleteLattice.Finset
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Spectral bounds on the chromatic number and the independence number
@@ -28,7 +39,7 @@ pinned Mathlib revision, in `MATHLIB_DEFINITIONS.md` at the root of this reposit
 
 @[expose] public section
 
-open Finset SimpleGraph
+open Finset SimpleGraph Matrix
 
 namespace AdjacencySpectrum
 
@@ -63,3 +74,73 @@ theorem hoffman_ratio {k : ℕ} (hk : 1 ≤ k) (hreg : G.IsRegularOfDegree k) {s
   sorry
 
 end AdjacencySpectrum
+
+noncomputable section
+
+namespace GraphCheeger
+
+open Finset
+
+universe u
+variable {V : Type u} [Fintype V]
+variable (G : SimpleGraph V) [DecidableRel G.Adj]
+
+/-- Both orientations of each edge. -/
+def arcs : Finset (V × V) := univ.filter (fun e => G.Adj e.1 e.2)
+
+open Classical in
+/-- The edges crossing from A to its complement, counted once. -/
+noncomputable def boundary (A : Finset V) : ℕ :=
+  ((arcs G).filter (fun e => e.1 ∈ A ∧ e.2 ∉ A)).card
+
+/-- The unnormalized graph Dirichlet energy; each undirected edge contributes once. -/
+def energy (f : V → ℝ) : ℝ :=
+  (∑ e ∈ arcs G, (f e.1 - f e.2) ^ 2) / 2
+
+def mass (f : V → ℝ) : ℝ := ∑ x, f x ^ 2
+
+
+/-- Edge expansion over nonempty sets of at most half the vertices. -/
+noncomputable def cheegerConstant : ℝ :=
+  sInf {r : ℝ | ∃ A : Finset V, 0 < A.card ∧ 2 * A.card ≤ Fintype.card V ∧
+    r = (boundary G A : ℝ) / A.card}
+
+/-- The spectral gap in Rayleigh variational form on the orthogonal complement of constants. -/
+noncomputable def spectralGap : ℝ :=
+  sInf {r : ℝ | ∃ f : V → ℝ, (∑ x, f x) = 0 ∧ 0 < mass f ∧
+    r = energy G f / mass f}
+
+open Classical in
+theorem cheeger_inequalities (hn : 2 ≤ Fintype.card V) :
+    spectralGap G / 2 ≤ cheegerConstant G ∧
+      cheegerConstant G ^ 2 ≤ 2 * G.maxDegree * spectralGap G := by sorry
+
+open Classical in
+theorem poincare (hn : 2 ≤ Fintype.card V)
+    (f : V → ℝ) (hzero : (∑ x, f x) = 0) :
+    cheegerConstant G ^ 2 * mass f ≤ 2 * G.maxDegree * energy G f := by sorry
+
+open Classical in
+theorem le_gap_iff (hn : 2 ≤ Fintype.card V) (l : ℝ) :
+    l ≤ spectralGap G ↔ ∀ f : V → ℝ, (∑ x, f x) = 0 → l * mass f ≤ energy G f := by sorry
+
+open Classical in
+theorem spectral_cut_bound (A : Finset V) (hpos : 0 < A.card)
+    (hproper : A.card < Fintype.card V) :
+    spectralGap G * A.card * (Fintype.card V - A.card) ≤
+      Fintype.card V * (boundary G A : ℝ) := by sorry
+
+end GraphCheeger
+
+namespace GraphCheeger
+
+variable {V : Type u} [Fintype V] [DecidableEq V]
+variable (G : SimpleGraph V) [DecidableRel G.Adj]
+
+theorem energy_eq_laplacian (f : V → ℝ) :
+    energy G f = f ⬝ᵥ (G.lapMatrix ℝ *ᵥ f) := by sorry
+
+theorem gap_le_laplacian_eigenvalue (l : ℝ) (hl : l ≠ 0) (f : V → ℝ) (hf : f ≠ 0)
+    (heig : G.lapMatrix ℝ *ᵥ f = l • f) : spectralGap G ≤ l := by sorry
+
+end GraphCheeger

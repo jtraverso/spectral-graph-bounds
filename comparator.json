@@ -6,9 +6,22 @@
     "AdjacencySpectrum.le_maxDegree",
     "AdjacencySpectrum.wilf",
     "AdjacencySpectrum.hoffman_chromatic",
-    "AdjacencySpectrum.hoffman_ratio"
+    "AdjacencySpectrum.hoffman_ratio",
+    "GraphCheeger.cheeger_inequalities",
+    "GraphCheeger.poincare",
+    "GraphCheeger.le_gap_iff",
+    "GraphCheeger.spectral_cut_bound",
+    "GraphCheeger.energy_eq_laplacian",
+    "GraphCheeger.gap_le_laplacian_eigenvalue"
   ],
-  "definition_names": [],
+  "definition_names": [
+    "GraphCheeger.arcs",
+    "GraphCheeger.boundary",
+    "GraphCheeger.energy",
+    "GraphCheeger.mass",
+    "GraphCheeger.cheegerConstant",
+    "GraphCheeger.spectralGap"
+  ],
   "permitted_axioms": [
     "propext",
     "Quot.sound",

@@ -1,0 +1,53 @@
+✔ [2732/2734] Built SpectralLib.SpectralBounds (3.4s)
+✔ [2733/2734] Built Solution (1.2s)
+Build completed successfully (2734 jobs).
+ℹ [2734/2735] Replayed Audit
+info: Audit.lean:13:0: 'AdjacencySpectrum.average_degree_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:14:0: 'AdjacencySpectrum.le_maxDegree' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:15:0: 'AdjacencySpectrum.wilf' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:16:0: 'AdjacencySpectrum.hoffman_chromatic' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:17:0: 'AdjacencySpectrum.hoffman_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:18:0: 'GraphCheeger.cheeger_inequalities' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:19:0: 'GraphCheeger.poincare' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:20:0: 'GraphCheeger.le_gap_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:21:0: 'GraphCheeger.spectral_cut_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:22:0: 'GraphCheeger.energy_eq_laplacian' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Audit.lean:23:0: 'GraphCheeger.gap_le_laplacian_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (2735 jobs).
+⚠ [2726/2727] Built Challenge (1.3s)
+warning: Challenge.lean:50:8: declaration uses `sorry`
+warning: Challenge.lean:55:8: declaration uses `sorry`
+warning: Challenge.lean:60:8: declaration uses `sorry`
+warning: Challenge.lean:65:8: declaration uses `sorry`
+warning: Challenge.lean:71:8: declaration uses `sorry`
+warning: Challenge.lean:114:8: declaration uses `sorry`
+warning: Challenge.lean:119:8: declaration uses `sorry`
+warning: Challenge.lean:124:8: declaration uses `sorry`
+warning: Challenge.lean:128:8: declaration uses `sorry`
+warning: Challenge.lean:140:8: declaration uses `sorry`
+warning: Challenge.lean:143:8: declaration uses `sorry`
+Build completed successfully (2727 jobs).
+Resolving dependencies
+Building Challenge
+⚠ [2726/2727] Replayed Challenge
+warning: Challenge.lean:50:8: declaration uses `sorry`
+warning: Challenge.lean:55:8: declaration uses `sorry`
+warning: Challenge.lean:60:8: declaration uses `sorry`
+warning: Challenge.lean:65:8: declaration uses `sorry`
+warning: Challenge.lean:71:8: declaration uses `sorry`
+warning: Challenge.lean:114:8: declaration uses `sorry`
+warning: Challenge.lean:119:8: declaration uses `sorry`
+warning: Challenge.lean:124:8: declaration uses `sorry`
+warning: Challenge.lean:128:8: declaration uses `sorry`
+warning: Challenge.lean:140:8: declaration uses `sorry`
+warning: Challenge.lean:143:8: declaration uses `sorry`
+Build completed successfully (2727 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, AdjacencySpectrum.average_degree_le, AdjacencySpectrum.le_maxDegree, AdjacencySpectrum.wilf, AdjacencySpectrum.hoffman_chromatic, AdjacencySpectrum.hoffman_ratio, GraphCheeger.cheeger_inequalities, GraphCheeger.poincare, GraphCheeger.le_gap_iff, GraphCheeger.spectral_cut_bound, GraphCheeger.energy_eq_laplacian, GraphCheeger.gap_le_laplacian_eigenvalue, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam, GraphCheeger.arcs, GraphCheeger.boundary, GraphCheeger.energy, GraphCheeger.mass, GraphCheeger.cheegerConstant, GraphCheeger.spectralGap] from Challenge
+Building Solution
+Build completed successfully (2734 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, AdjacencySpectrum.average_degree_le, AdjacencySpectrum.le_maxDegree, AdjacencySpectrum.wilf, AdjacencySpectrum.hoffman_chromatic, AdjacencySpectrum.hoffman_ratio, GraphCheeger.cheeger_inequalities, GraphCheeger.poincare, GraphCheeger.le_gap_iff, GraphCheeger.spectral_cut_bound, GraphCheeger.energy_eq_laplacian, GraphCheeger.gap_le_laplacian_eigenvalue, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam, GraphCheeger.arcs, GraphCheeger.boundary, GraphCheeger.energy, GraphCheeger.mass, GraphCheeger.cheegerConstant, GraphCheeger.spectralGap] from Solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!

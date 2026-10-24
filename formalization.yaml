@@ -1,160 +1,227 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
-version: "v0.4"
-
+version: v0.4
 project:
-  name: "Spectral bounds on the chromatic and independence numbers"
-  description: >-
-    A Lean 4 / Mathlib formalization of classical eigenvalue bounds for a finite simple graph G on
-    a nonempty vertex type, with λ_max and λ_min the largest and smallest eigenvalues of its real
-    adjacency matrix: the average degree is at most λ_max and λ_max is at most the maximum degree
-    (Collatz–Sinogowitz); G is (⌊λ_max⌋ + 1)-colourable (Wilf 1967); if G has an edge, every
-    proper colouring uses at least 1 − λ_max/λ_min colours (Hoffman 1970); and if G is k-regular
-    with k ≥ 1, every independent set has at most n(−λ_min)/(k − λ_min) vertices (Hoffman's ratio
-    bound). Mathlib has the spectral theorem for Hermitian matrices but none of these bounds.
+  name: Spectral graph bounds and discrete Cheeger inequalities
+  description: Extends the five registered adjacency-spectrum bounds with discrete Cheeger inequalities lambda/2
+    <= h and h^2 <= 2 Delta lambda for the unnormalized graph Laplacian in Rayleigh variational form. Includes
+    the universal Poincare estimate, greatest-constant characterization, complementary spectral cut bound,
+    actual Laplacian energy identity, and comparison with nonzero Laplacian eigenvalues.
   authors:
-    - "Juan Pablo Traverso Gianini"
-  license: "Apache-2.0"
+  - Juan Pablo Traverso Gianini
+  license: Apache-2.0
   responsible_maintainers:
-    - "Juan Pablo Traverso Gianini"
-
+  - Juan Pablo Traverso Gianini
 classification:
-  arxiv: ["math.CO"]
-  msc2020: ["05C50", "05C15", "05C69"]
-
+  arxiv:
+  - math.CO
+  msc2020:
+  - 05C50
+  - 05C40
+  - 05C15
+  - 05C69
 sources:
-  - title: "Spektren endlicher Grafen"
-    authors:
-      - "L. Collatz"
-      - "U. Sinogowitz"
-    id: "doi:10.1007/BF02941924"
-    type: "paper"
-    location: "Abhandlungen aus dem Mathematischen Seminar der Universität Hamburg 21 (1957), 63–77"
-    relationship: "formalizes"
-    note: "Average degree ≤ λ_max ≤ maximum degree."
-    license: "all rights reserved"
-    author_endorsement: "n/a"
-  - title: "The Eigenvalues of a Graph and Its Chromatic Number"
-    authors:
-      - "H. S. Wilf"
-    id: "doi:10.1112/jlms/s1-42.1.330"
-    type: "paper"
-    location: "Journal of the London Mathematical Society 42 (1967), 330–332"
-    relationship: "formalizes"
-    note: "χ(G) ≤ 1 + λ_max."
-    license: "all rights reserved"
-    author_endorsement: "n/a"
-  - title: "On eigenvalues and colorings of graphs"
-    authors:
-      - "A. J. Hoffman"
-    type: "paper"
-    location: "In: B. Harris (ed.), Graph Theory and its Applications, Academic Press, New York (1970), 79–91"
-    relationship: "formalizes"
-    note: "χ(G) ≥ 1 − λ_max/λ_min for graphs with at least one edge (no DOI)."
-    license: "all rights reserved"
-    author_endorsement: "n/a"
-  - title: "On the Shannon capacity of a graph"
-    authors:
-      - "L. Lovász"
-    id: "doi:10.1109/TIT.1979.1055985"
-    type: "paper"
-    location: "IEEE Transactions on Information Theory 25 (1979), 1–7"
-    relationship: "background"
-    note: >-
-      Hoffman's ratio bound α(G) ≤ n(−λ_min)/(λ_max − λ_min) for regular graphs, obtained there
-      through the bound on the theta function; the formalization proves it directly by the
-      Rayleigh quotient.
-    license: "all rights reserved"
-    author_endorsement: "n/a"
-
+- title: Spektren endlicher Grafen
+  authors:
+  - L. Collatz
+  - U. Sinogowitz
+  id: doi:10.1007/BF02941924
+  type: paper
+  location: Abhandlungen aus dem Mathematischen Seminar der Universität Hamburg 21 (1957), 63–77
+  relationship: formalizes
+  note: Average degree ≤ λ_max ≤ maximum degree.
+  license: all rights reserved
+  author_endorsement: n/a
+- title: The Eigenvalues of a Graph and Its Chromatic Number
+  authors:
+  - H. S. Wilf
+  id: doi:10.1112/jlms/s1-42.1.330
+  type: paper
+  location: Journal of the London Mathematical Society 42 (1967), 330–332
+  relationship: formalizes
+  note: χ(G) ≤ 1 + λ_max.
+  license: all rights reserved
+  author_endorsement: n/a
+- title: On eigenvalues and colorings of graphs
+  authors:
+  - A. J. Hoffman
+  type: paper
+  location: 'In: B. Harris (ed.), Graph Theory and its Applications, Academic Press, New York (1970), 79–91'
+  relationship: formalizes
+  note: χ(G) ≥ 1 − λ_max/λ_min for graphs with at least one edge (no DOI).
+  license: all rights reserved
+  author_endorsement: n/a
+- title: On the Shannon capacity of a graph
+  authors:
+  - L. Lovász
+  id: doi:10.1109/TIT.1979.1055985
+  type: paper
+  location: IEEE Transactions on Information Theory 25 (1979), 1–7
+  relationship: background
+  note: Hoffman's ratio bound α(G) ≤ n(−λ_min)/(λ_max − λ_min) for regular graphs, obtained there through the
+    bound on the theta function; the formalization proves it directly by the Rayleigh quotient.
+  license: all rights reserved
+  author_endorsement: n/a
+- title: lambda_1, Isoperimetric Inequalities for Graphs, and Superconcentrators
+  authors:
+  - Noga Alon
+  - Vitali D. Milman
+  id: doi:10.1016/0095-8956(85)90092-9
+  type: paper
+  location: Journal of Combinatorial Theory, Series B 38 (1985), 73–88; Section 2, (2.1), Lemma 2.1, complementary
+    sets at distance one
+  relationship: formalizes
+  note: Consulted the primary open PDF at https://web.math.princeton.edu/~nalon/PDFS/Publications2/lambda%20%20isoperimetric%20inequalities%20for%20graphs%20and%20superconcentrators.pdf.
+    The new cut estimate is the complementary-set distance-one case. The package also proves the modern edge-boundary/Rayleigh
+    formulation of the discrete Cheeger inequalities. Does not formalize the entire paper, concentration/diameter
+    bounds, or superconcentrator constructions.
+  license: all rights reserved
+  author_endorsement: n/a
+- title: Difference Equations, Isoperimetric Inequality and Transience of Certain Random Walks
+  authors:
+  - Jozef Dodziuk
+  id: doi:10.1090/S0002-9947-1984-0743744-X
+  type: paper
+  location: Transactions of the American Mathematical Society 284 (1984), 787–794
+  relationship: background
+  note: Historical background for discrete Cheeger estimates; institutional record https://academicworks.cuny.edu/gc_pubs/181/
+    was consulted, but its PDF download was unavailable in the reader. Infinite-graph transience and the full
+    paper are not formalized.
+  license: unknown
+  author_endorsement: n/a
+- title: Lean Pool finite medians and additive coarea infrastructure
+  authors:
+  - OpenAI
+  - Dean Cureton
+  type: other
+  location: LeanPool/lean-pool at edbe5bd56f476cc2965564676b66199f281ab714, NonSoficGroup/Foundations.lean
+    and Compression.lean
+  relationship: adapts
+  note: Finite median/variance code extracted; additive permutation coarea induction adapted to finite simple
+    graph arcs. Copyright and authorship preserved. Exact changes in THIRD_PARTY.md. No non-soficity statement
+    imported or claimed.
+  license: Apache-2.0
+  author_endorsement: n/a
 status:
-  scope: >-
-    Proved for every finite simple graph on a nonempty vertex type (any universe), with the
-    hypotheses stated in each theorem (an edge for Hoffman's chromatic bound; k-regularity with
-    k ≥ 1 for the ratio bound).
+  scope: 'Eleven selected statements: five preserved adjacency-spectrum bounds on finite nonempty simple graphs
+    and six new finite graph Cheeger/Poincare/cut/Laplacian statements. The main discrete Cheeger theorem assumes
+    n >= 2 only, and includes disconnected and edgeless graphs. The gap is explicitly the Rayleigh infimum
+    over mean-zero nonzero functions; not a sorted-eigenvalue-index definition. Six independent explicit definitions
+    are compared. Eleven intentional placeholders occur only in the independent Challenge.'
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
-
 automation:
   methods:
-    - method: "autonomous"
-      models: ["Aristotle (Harmonic)"]
-      framework: "Aristotle CLI"
-      tool_setup: >-
-        Produced all proofs in one run from the formal statements and a proof plan (Rayleigh
-        quotient bounds from the spectral theorem, greedy colouring, test vectors on colour
-        classes and independent sets); the return was audited (statements and headers unchanged,
-        no added axioms) and rebuilt locally.
-      cost:
-        wall_time: "under one hour"
-        spend_usd: "not tracked"
-        hardware: "API-only"
-      prompting_notes: "Formal statements and proof plan supplied."
-    - method: "agent"
-      models: ["Claude Opus 5.5"]
-      framework: "Claude Code (Anthropic)"
-      tool_setup: >-
-        Statement design, proof plan, integration and review of the Aristotle return, and the
-        Palomar packaging, checked with `lake build` and `#print axioms` (Lean v4.35.0-rc3,
-        Mathlib c55e6e786f49471c72fbddbec5415808896aec1e).
-      cost:
-        wall_time: "about one hour"
-        spend_usd: "subscription-based"
-        hardware: "local machine"
-      prompting_notes: "Natural-language instructions in Spanish, directed by the author."
-  spend_usd: "subscription-based"
-  notes: >-
-    The results were chosen by the human author; the Lean proofs are AI-generated and
-    mechanically verified (no `sorry`, axioms limited to propext, Classical.choice and Quot.sound,
-    identical elaborated types for the Challenge/Solution pair).
-
+  - method: autonomous
+    models:
+    - Aristotle (Harmonic)
+    framework: Aristotle CLI
+    tool_setup: Produced all proofs in one run from the formal statements and a proof plan (Rayleigh quotient
+      bounds from the spectral theorem, greedy colouring, test vectors on colour classes and independent sets);
+      the return was audited (statements and headers unchanged, no added axioms) and rebuilt locally.
+    cost:
+      wall_time: under one hour
+      spend_usd: not tracked
+      hardware: API-only
+    prompting_notes: Formal statements and proof plan supplied.
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code (Anthropic)
+    tool_setup: Statement design, proof plan, integration and review of the Aristotle return, and the Palomar
+      packaging, checked with `lake build` and `#print axioms` (Lean v4.35.0-rc3, Mathlib c55e6e786f49471c72fbddbec5415808896aec1e).
+    cost:
+      wall_time: about one hour
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: Natural-language instructions in Spanish, directed by the author.
+  - method: agent
+    models:
+    - OpenAI Codex
+    framework: Codex
+    tool_setup: 'New extension: extracted finite median code from Lean Pool; adapted the support-peeling coarea
+      induction from permutation variation to symmetric graph arcs; constructed Cauchy–Schwarz/degree estimates,
+      mean-zero Poincare inequality, Rayleigh-infimum arguments and Laplacian bridges. Preserved the old proof
+      bodies and narrowed their Mathlib imports. Used strict Lean builds, explicit boundary/axiom audits, independent
+      Comparator with Lean and NanoDa. No sub-agents or external proving service were used for the extension.'
+    prompting_notes: Human-directed continuation of the effort/reuse-prioritized backlog, preserving the existing
+      registered results and using the GitHub plugin for publication. New extension costs and wall time were
+      not tracked.
+  spend_usd: subscription-based
+  notes: The results were chosen by the human author; the Lean proofs are AI-generated and mechanically verified
+    (no `sorry`, axioms limited to propext, Classical.choice and Quot.sound, identical elaborated types for
+    the Challenge/Solution pair).
 fidelity:
-  divergences: >-
-    The eigenvalues are Mathlib's `Matrix.IsHermitian.eigenvalues` of the real adjacency matrix,
-    indexed by the vertex type; the statements take the (always satisfiable) hypothesis that the
-    adjacency matrix is Hermitian, and λ_max, λ_min are written `⨆ i, hA.eigenvalues i` and
-    `⨅ i, hA.eigenvalues i`. Wilf's bound is stated as colourability with ⌊λ_max⌋ + 1 colours.
-    Hoffman's chromatic bound is stated for every c such that G is c-colourable, and requires an
-    edge (otherwise λ_min = 0). The ratio bound is stated for k-regular graphs with k ≥ 1, where
-    λ_max = k.
-
+  divergences: The five original registered contracts are unchanged. New GraphCheeger definitions use finite
+    oriented arcs, boundary arcs directed from a set to its complement (one per crossing edge), unnormalized
+    Dirichlet energy (oriented square sum divided by two), and actual finite maximum degree. The graph gap
+    is the infimum of E(f)/sum(f^2) over nonzero mean-zero real functions. Under n >= 2 both variational sets
+    are proved nonempty and bounded below. The pair of Cheeger inequalities and Poincare estimate have no regularity,
+    connectivity, positive-degree, or positive-gap premise. A separate zero-degree argument is proved. The
+    complementary-set spectral cut bound corresponds to the distance-one complementary case of Alon–Milman
+    Lemma 2.1. Energy is proved equal to the quadratic form of Mathlib SimpleGraph.lapMatrix, and the gap is
+    characterized as the greatest Poincare constant; nonzero Laplacian eigenvalues are bounded below by it.
+    Equality with a specific sorted Matrix.IsHermitian.eigenvalues_0 index is not proved here. The manifold
+    Cheeger theorem, infinite-graph transience, expander constructions, concentration and diameter bounds,
+    and superconcentrators are outside scope.
 review:
-  status: "agent-reviewed"
+  status: self-assessed
   reviewers:
-    - "Claude Opus 5.5 (AI agent in Claude Code, acting for the author)"
-  notes: >-
-    Agent review by Claude Opus 5.5, distinct from the mechanical verification: the agent
-    compared the statements with the cited bounds, checked the degenerate cases (no edges,
-    k = 0), checked that the Aristotle return left every statement and header unchanged, and
-    confirmed by `lake build`, `#print axioms` and a comparison of the fully elaborated
-    Challenge and Solution types that the proofs use no `sorry` and only propext,
-    Classical.choice and Quot.sound. The author directed the work and approved the statements.
-    No independent human mathematical review has been performed. The results are classical; no
-    mathematical novelty is claimed.
-
+  - Claude Opus 5.5 (AI agent in Claude Code, acting for the author)
+  notes: 'The old five-result package retains its registered proof bodies, statements and recorded provenance.
+    The new extension is self-assessed: checked the primary Alon–Milman Laplacian/Rayleigh normalization and
+    complementary-set cut estimate. Six graph definitions are repeated fully in the independent Challenge.
+    The audit checks eleven axiom sets, exact K2 energy, h = 1 and lambda = 2, tightness of lambda/2 <= h,
+    and h = lambda = 0 for an edgeless three-vertex graph. No solution placeholders, custom axioms, independent
+    human review, or mathematical novelty is claimed. Local/remote preflight evidence does not itself submit
+    or register an entry.'
 alignment:
-  namespace: "AdjacencySpectrum"
+  namespace: AdjacencySpectrum
   statements:
-    - source: "Collatz–Sinogowitz (1957): average degree ≤ λ_max"
-      lean: "AdjacencySpectrum.average_degree_le"
-      module: "Challenge"
-      status: "proved"
-    - source: "Collatz–Sinogowitz (1957): λ_max ≤ maximum degree"
-      lean: "AdjacencySpectrum.le_maxDegree"
-      module: "Challenge"
-      status: "proved"
-    - source: "Wilf (1967): χ(G) ≤ ⌊λ_max⌋ + 1"
-      lean: "AdjacencySpectrum.wilf"
-      module: "Challenge"
-      status: "proved"
-    - source: "Hoffman (1970): χ(G) ≥ 1 − λ_max/λ_min"
-      lean: "AdjacencySpectrum.hoffman_chromatic"
-      module: "Challenge"
-      status: "proved"
-    - source: "Hoffman's ratio bound for regular graphs"
-      lean: "AdjacencySpectrum.hoffman_ratio"
-      module: "Challenge"
-      status: "proved"
-
-acknowledgements: >-
-  Mathlib and the Lean community; Harmonic's Aristotle.
+  - source: 'Collatz–Sinogowitz (1957): average degree ≤ λ_max'
+    lean: AdjacencySpectrum.average_degree_le
+    module: Challenge
+    status: proved
+  - source: 'Collatz–Sinogowitz (1957): λ_max ≤ maximum degree'
+    lean: AdjacencySpectrum.le_maxDegree
+    module: Challenge
+    status: proved
+  - source: 'Wilf (1967): χ(G) ≤ ⌊λ_max⌋ + 1'
+    lean: AdjacencySpectrum.wilf
+    module: Challenge
+    status: proved
+  - source: 'Hoffman (1970): χ(G) ≥ 1 − λ_max/λ_min'
+    lean: AdjacencySpectrum.hoffman_chromatic
+    module: Challenge
+    status: proved
+  - source: Hoffman's ratio bound for regular graphs
+    lean: AdjacencySpectrum.hoffman_ratio
+    module: Challenge
+    status: proved
+  - source: Discrete Cheeger inequalities in edge-boundary/Rayleigh form
+    lean: GraphCheeger.cheeger_inequalities
+    module: Challenge
+    status: proved
+  - source: Mean-zero Cheeger–Poincare estimate
+    lean: GraphCheeger.poincare
+    module: Challenge
+    status: proved
+  - source: Greatest mean-zero Poincare constant characterization
+    lean: GraphCheeger.le_gap_iff
+    module: Challenge
+    status: proved
+  - source: Alon–Milman spectral cut estimate, complementary sets and distance one
+    lean: GraphCheeger.spectral_cut_bound
+    module: Challenge
+    status: proved
+  - source: Energy normalization for Mathlib graph Laplacian
+    lean: GraphCheeger.energy_eq_laplacian
+    module: Challenge
+    status: proved
+  - source: Nonzero graph Laplacian eigenvalue comparison
+    lean: GraphCheeger.gap_le_laplacian_eigenvalue
+    module: Challenge
+    status: proved
+acknowledgements: Mathlib and the Lean community; Alon, Milman, Cheeger and Dodziuk for the classical theory;
+  OpenAI and Dean Cureton for the reused Lean Pool code. Existing spectral-result authorship and Aristotle/Claude
+  provenance are preserved.
